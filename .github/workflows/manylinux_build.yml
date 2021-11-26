@@ -102,7 +102,6 @@ jobs:
             poetry run pytest && \
             maturin build --no-sdist --release --strip -i ${{ env.py }} && \
             for WHL in target/wheels/*whl; do auditwheel repair ${WHL}; done && \
-            ls target/wheels && \
             twine upload target/wheels/*whl --repository-url https://test.pypi.org/legacy/ -u ${{ secrets.TEST_PYPI_USER }} -p ${{ secrets.TEST_PYPI_PASS }} && \
             twine upload target/wheels/*whl -u ${{ secrets.PYPI_USER }} -p ${{ secrets.PYPI_PASS }} && \
             deactivate'
